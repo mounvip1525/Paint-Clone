@@ -30,6 +30,7 @@ const context=canvas.getContext('2d');
 bucketColorBtn.addEventListener('change',()=>{
     bucketColor=`#${bucketColorBtn.value}`;
     createCanvas();
+    restoreCanvas();
 });
 
 //to select and retrieve the selected color value
@@ -102,6 +103,14 @@ canvas.addEventListener('mousedown',(event)=>{
     context.strokeStyle=currentColor;
 });
 
+//Clear the canvas
+clearCanvasBtn.addEventListener('click',()=>{
+    createCanvas();
+    drawnArray=[];
+    activeToolEl.textContent='Canvas Cleared';
+    setTimeout(switchToBrush,1500);
+});
+
 
 //Drawn what is stored in drawnArray
 function restoreCanvas(){
@@ -120,7 +129,12 @@ function restoreCanvas(){
     }
 }
 
-
+//Sve to local storage
+saveStorageBtn.addEventListener('click',()=>{
+    localStorage.setItem('savedCanvas',JSON.stringify(drawnArray));
+    activeToolEl.textContent='Canvas Saved!';
+    setTimeout(switchToBrush,1500);
+});
 //Store the drawn cordinates in the drawnArray
 function storeDrawn(x,y,size,color,erase){
     const curve={
@@ -129,6 +143,8 @@ function storeDrawn(x,y,size,color,erase){
     console.log(curve);
     drawnArray.push(curve);
 }
+
+
 //get all the cordinates on mourse movements
 canvas.addEventListener('mousemove',(event)=>{
     if(isMouseDown){
@@ -141,6 +157,7 @@ canvas.addEventListener('mousemove',(event)=>{
         storeDrawn(undefined);
     }
 });
+
 
 //get the cordinates once mouse up
 canvas.addEventListener('mouseup',(event)=>{
