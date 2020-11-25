@@ -82,6 +82,31 @@ function createCanvas(){
     switchToBrush(); //Default-brush is to be selected
 }
 
+//Clear the canvas
+clearCanvasBtn.addEventListener('click',()=>{
+    createCanvas();
+    drawnArray=[];
+    activeToolEl.textContent='Canvas Cleared';
+    setTimeout(switchToBrush,1500);
+});
+
+//Drawn what is stored in drawnArray
+function restoreCanvas(){
+    for(let i=1;i<drawnArray.length;i++){
+        context.beginPath();
+        context.moveTo(drawnArray[i-1].x,drawnArray[i-1].y);
+        context.lineWidth=drawnArray[i].size;
+        context.lineCap='round';
+        if(drawnArray[i].eraser){
+            context.strokeStyle=bucketColor;
+        } else {
+            context.strokeStyle=drawnArray[i].color;
+        }
+        context.lineTo(drawnArray[i].x,drawnArray[i].y);
+        context.stroke();
+    }
+}
+
 //Get the mouse positions
 function getMousePosition(event){
     const boundaries=canvas.getBoundingClientRect();
@@ -103,48 +128,6 @@ canvas.addEventListener('mousedown',(event)=>{
     context.strokeStyle=currentColor;
 });
 
-//Clear the canvas
-clearCanvasBtn.addEventListener('click',()=>{
-    createCanvas();
-    drawnArray=[];
-    activeToolEl.textContent='Canvas Cleared';
-    setTimeout(switchToBrush,1500);
-});
-
-
-//Drawn what is stored in drawnArray
-function restoreCanvas(){
-    for(let i=1;i<drawnArray.length;i++){
-        context.beginPath();
-        context.moveTo(drawnArray[i-1].x,drawnArray[i-1].y);
-        context.lineWidth=drawnArray[i].size;
-        context.lineCap='round';
-        if(drawnArray[i].eraser){
-            context.strokeStyle=bucketColor;
-        } else {
-            context.strokeStyle=drawnArray[i].color;
-        }
-        context.lineTo(drawnArray[i].x,drawnArray[i].y);
-        context.stroke();
-    }
-}
-
-//Sve to local storage
-saveStorageBtn.addEventListener('click',()=>{
-    localStorage.setItem('savedCanvas',JSON.stringify(drawnArray));
-    activeToolEl.textContent='Canvas Saved!';
-    setTimeout(switchToBrush,1500);
-});
-//Store the drawn cordinates in the drawnArray
-function storeDrawn(x,y,size,color,erase){
-    const curve={
-        x,y,size,color,erase,
-    };
-    console.log(curve);
-    drawnArray.push(curve);
-}
-
-
 //get all the cordinates on mourse movements
 canvas.addEventListener('mousemove',(event)=>{
     if(isMouseDown){
@@ -158,13 +141,55 @@ canvas.addEventListener('mousemove',(event)=>{
     }
 });
 
-
 //get the cordinates once mouse up
 canvas.addEventListener('mouseup',(event)=>{
     isMouseDown=false;
     // console.log('mouse is unclicked');
 });
 
+//Load from local storage if exists
+loadStorageBtn.addEventListener('click',()=>{
+    if(localStorage.getItem('savedCanvas')){
+        drawnArray=JSON.parse(localStorage.savedCanvas);
+        restoreCanvas();
+        activeToolEl.textContent='Canvas Loaded';
+    } else {
+        activeToolEl.textContent='No canvas found';
+    }
+    setTimeout(switchToBrush,1500);
+})
 
+
+//Store the drawn cordinates in the drawnArray
+function storeDrawn(x,y,size,color,erase){
+    const curve={
+        x,y,size,color,erase,
+    };
+    console.log(curve);
+    drawnArray.push(curve);
+}
+
+//Save to local storage
+saveStorageBtn.addEventListener('click',()=>{
+    localStorage.setItem('savedCanvas',JSON.stringify(drawnArray));
+    activeToolEl.textContent='Canvas Saved!';
+    setTimeout(switchToBrush,1500);
+});
+
+
+//Clear from local storage
+clearStorageBtn.addEventListener('click',()=>{
+    localStorage.removeItem('savedCanvas');
+    activeToolEl.textContent='Local Storage Cleared';
+    setTimeout(switchToBrush,1500);
+});
+
+//Download as jpeg
+downloadBtn.addEventListener('click',()=>{
+    downloadBtn.href=canvas.toDataURL('image/jpeg',1);  //here 1 is the image quality (range is between 0 to 1)
+    downloadBtn.download='my-paint.jpeg';
+    activeToolEl.textContent='Image File Saved';
+    setTimeout(switchToBrush,2000);
+});
 createCanvas();
 brushIcon.addEventListener('click',switchToBrush);
