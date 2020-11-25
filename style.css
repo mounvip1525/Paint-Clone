@@ -16,156 +16,139 @@ body{
     justify-content: center;
     background:rgb(212, 211, 211);
 }
-
-/* Font Awesome Icons */
-.fas,
-.far {
-  font-size: 25px;
-  position: relative;
-  top: 5px;
-  background-color: rgb(82, 82, 82);
-  color: white;
-  padding: 5px;
-  border-radius: 5px;
-  width: 40px;
-  text-align: center;
-  cursor: pointer;
+.fas{
+    font-size:25px;
+    background-color: rgba(82,82,82,0.5);
+    color:white;
+    width:40px;
+    border-radius: 5px;
+    padding:5px;
+    top:5px;
+    text-align: center;
+    cursor:pointer;
+    position:relative;
 }
-
-.fas:hover,
-.far:hover {
-  filter: brightness(90%);
+.fas:hover{
+    filter:brightness(80%);
 }
-
-.fa-fill-drip {
-  cursor: default;
+.fa-paint-brush:hover,
+.fa-fill-drip:hover,
+.fa-eraser:hover,
+.fa-file-download:hover{
+    color:black;
 }
-
+.fa-upload:hover{
+    color:rgb(53, 114, 175);
+}
+.fa-download:hover{
+    color:rgb(63, 161, 63);
+}
 .fa-undo-alt:hover,
-.fa-trash-alt:hover {
-  color: rgb(223, 37, 37);
+.fa-trash-alt:hover{
+    color:rgb(223,37,37);
 }
-
-/* Tools */
-.active-tool {
-  position: absolute;
-  top: 9px;
-  left: 5px;
+.active-tool{
+    position:absolute;
+    top:13px;
+    left:10px;
 }
-
-.active-tool > span {
-  background-color: rgb(82, 82, 82);
-  border-radius: 5px;
-  padding: 2.5px 16px;
-  color: white;
-  font-size: 20px;
-  user-select: none;
+.active-tool > span{
+    background:grey;
+    border-radius: 5px;
+    color:white;
+    padding:2.5px 15px;
+    font-size:20px;
+    user-select: none;
 }
-
-.tool {
-  position: relative;
-  top: 3px;
+.tool{
+    position:relative;
+    top:3px;
 }
-
-.tool:not(:first-child) {
-  margin-left: 8px;
+.tool:not(:first-child){
+    margin-left:8px;
 }
-
-.brush {
-  background-color: rgb(114, 114, 114);
-  height: 44px;
-  width: 345px;
+.brush{
+    background-color: rgb(133, 131, 131);
+    height:44px;
+    width:350px;
 }
-
-.brush > * {
-  margin-left: 10px;
+.brush > *{
+    margin-left:8px;
 }
-
-.size {
-  min-width: 40px;
-  height: 35px;
-  position: relative;
-  top: 4px;
-  left: -5px;
-  background-color: rgb(82, 82, 82);
-  border-radius: 5px;
-  padding: 2.5px 8px;
-  color: white;
-  font-size: 20px;
-  user-select: none;
+.size{
+    width:40px;
+    position:relative;
+    top:3px;
+    background:rgba(82,82,82,0.5);
+    border-radius: 5px;
+    padding:3px 8px;
+    color:white;
+    font-size: 20px;
+    user-select: none;
 }
-/* Custom Slider */
+/* custom slider-source:w3schools */
 .slider {
     -webkit-appearance: none;
-    position: relative;
-    left: -8px;
+    position:relative;
     width: 100px;
-    height: 10px;
-    background: rgb(177, 177, 177);
+    height: 8px;
+    border-radius: 5px;  
+    background: #d3d3d3;
     outline: none;
     opacity: 0.7;
-    cursor: pointer;
-    -webkit-transition: 0.2s;
-    transition: opacity 0.2s;
-  }
-  
-  .slider:hover {
-    opacity: 1;
-  }
-  
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+.slider:hover{
+    opacity:1;
+} 
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    width: 10px;
-    height: 10px;
-    background: rgb(47, 47, 47);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%; 
+    background: #1d1e1f;
+    cursor: pointer;
   }
   
   .slider::-moz-range-thumb {
     width: 10px;
     height: 10px;
-    background: rgb(47, 47, 47);
+    border-radius: 50%;
+    background: #1d1e1f;
+    cursor: pointer;
   }
-  
-  /* JS Color */
-  .jscolor {
+.jscolor{
     border-style: solid;
     border-radius: 5px;
-    height: 35px;
-    width: 120px;
-    margin-left: 3px;
+    height:35px;
+    width:120px;
+    margin-left:3px;
     text-align: center;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  /* Canvas */
-  canvas#canvas {
+    cursor:pointer;
+    outline:none;
+}
+canvas#canvas {
     background-color: rgb(177, 177, 177);
     position: absolute;
     top: 50px;
     cursor: crosshair;
     z-index: 10;
   }
-  
-  /* Mobile Message */
-  .mobile-message {
-    display: none;
-  }
-  
-  /* Media Query: Mobile Devices */
-  @media screen and (max-width: 800px) {
-    .mobile-message {
-      position: absolute;
-      height: 100vh;
-      width: 100%;
-      background-color: rgb(0, 0, 0);
-      color: white;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      z-index: 100;
+.message{
+    display:none;
+}
+@media screen and (max-width:800px){
+    .message{
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        height:100vh;
+        width:100%;
+        background:rgb(36, 32, 32);
+        z-index:100;
+        color:white;
+        text-align: center;
     }
-  }
-  
+}

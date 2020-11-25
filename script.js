@@ -18,6 +18,8 @@ let currentSize=30;
 let bucketColor='#FFFFFF';
 let currentColor='#A51DAB';
 
+isEraser=false;
+
 const canvas=document.createElement('canvas');
 canvas.id='canvas'; //jscolor is also a canvas hence need to explicitely mention the id
 const context=canvas.getContext('2d');
@@ -26,6 +28,27 @@ bucketColorBtn.addEventListener('change',()=>{
     bucketColor=`#${bucketColorBtn.value}`;
     createCanvas();
 });
+brushColorBtn.addEventListener('change',()=>{
+    isEraser=false;
+    currentColor=`#${brushColorBtn.value}`;
+});
+eraser.addEventListener('click',()=>{
+    isEraser=true;
+    brushIcon.style.color='white';
+    eraser.style.color='black';
+    activeToolEl.textContent='Eraser';
+    currentColor=bucketColor;
+    currentSize=50;
+});
+function switchToBrush(){
+    isEraser=false;
+    brushIcon.style.color='black';
+    eraser.style.color='white';
+    activeToolEl.textContent='Brush';
+    currentColor=`#${brushColorBtn.value}`;
+    currentSize=10;
+    brushSlider.value=10;
+}
 function createCanvas(){
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight-50;
