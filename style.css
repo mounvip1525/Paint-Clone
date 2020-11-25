@@ -9,4 +9,89 @@ body{
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     overflow:hidden
 }
+.top-bar{
+    height:50px;
+    width:100%;
+    display:flex;
+    justify-content: center;
+    background:rgb(212, 211, 211);
+}
+
+/* Font Awesome Icons */
+.fas,
+.far {
+  font-size: 25px;
+  position: relative;
+  top: 5px;
+  background-color: rgb(82, 82, 82);
+  color: white;
+  padding: 5px;
+  border-radius: 5px;
+  width: 40px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.fas:hover,
+.far:hover {
+  filter: brightness(90%);
+}
+
+.fa-fill-drip {
+  cursor: default;
+}
+
+.fa-undo-alt:hover,
+.fa-trash-alt:hover {
+  color: rgb(223, 37, 37);
+}
+
+/* Tools */
+.active-tool {
+  position: absolute;
+  top: 9px;
+  left: 5px;
+}
+
+.active-tool > span {
+  background-color: rgb(82, 82, 82);
+  border-radius: 5px;
+  padding: 2.5px 16px;
+  color: white;
+  font-size: 20px;
+  user-select: none;
+}
+
+.tool {
+  position: relative;
+  top: 3px;
+}
+
+.tool:not(:first-child) {
+  margin-left: 8px;
+}
+
+.brush {
+  background-color: rgb(114, 114, 114);
+  height: 44px;
+  width: 345px;
+}
+
+.brush > * {
+  margin-left: 10px;
+}
+
+.size {
+  min-width: 40px;
+  height: 35px;
+  position: relative;
+  top: 4px;
+  left: -5px;
+  background-color: rgb(82, 82, 82);
+  border-radius: 5px;
+  padding: 2.5px 8px;
+  color: white;
+  font-size: 20px;
+  user-select: none;
+}
 
