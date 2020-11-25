@@ -20,14 +20,14 @@
         <!-- Brush -->
         <div class="brush tool">
             <i class="fas fa-paint-brush" id="brush" title="Brush"></i>
-            <input type="color">
+            <input class="jscolor" value="a51dab" id="brush-color">
             <span class="size" id="brush-size" title="Brush Size">10</span>
             <input type="range" min="1" max="50" value="10" class="slider" id="brush-slider">
         </div>
         <!-- Bucket -->
         <div class="bucket tool">
             <i class="fas fa-fill-drip" title="Background Color"></i>
-            <input type="color">
+            <input class="jscolor" value="4567fe" id="bucket-color" title="Background">
         </div>
         <!-- Eraser -->
         <div class="tool">
@@ -59,6 +59,7 @@
             <h1>View this on Desktop/Larger Screen for a better experience!</h1>
         </div>
     </div>
+        <script src="jscolor.js"></script>
        <script src="script.js"></script>
     </body>
 </html>
